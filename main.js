@@ -23,7 +23,7 @@ app.get("/courses", homeController.showCourses);
 app.get("/contact", homeController.showSignUp);
 app.post("/contact", homeController.postedSignUpForm);
 
-app.use(errorController.pageNotFoundError )
+app.use(errorController.pageNotFoundError );
 
 app.listen(app.get("port"), () => {
     console.log(`Server is running on port: $ ${app.get("port")}`)
