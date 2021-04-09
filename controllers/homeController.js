@@ -13,18 +13,8 @@ var courses = [
     },
 ]
 
-exports.showCourses = (req, res) => {
-    res.render("courses", {offeredCourses: courses});
-}
-
-exports.showSignUp = (req, res) => {
-    res.render("contact");
-}
-
-exports.postedSignUpForm = (req, res) => {
-    res.render("contact");
-}
-
-exports.showIndex = (req, res) => {
-    res.render("index");
-}
+module.exports = {
+    index: (req, res) => {
+        res.render("index");
+    }
+ }

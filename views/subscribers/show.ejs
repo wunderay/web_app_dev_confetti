@@ -1,0 +1,37 @@
+<h2 class="center">Subscriber Data for <%= subscriber.name %></h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% subscribers.foreach(subscriber=> { %>
+            <tr>
+                <td>Name</td>
+                <td>
+                    <%= subscriber.name %>
+                </td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>
+                    <%= subscriber.email %>
+                </td>
+            </tr>
+            <tr>
+                <td>Zip Code</td>
+                <td>
+                    <%= subscriber.zipCode %>
+                </td>
+            </tr>
+            <tr>
+                <td>Number of Courses</td>
+                <td><%= subscribers.courses.length %></td>
+            </tr>
+            <% }) %>
+    </tbody>
+</table>
