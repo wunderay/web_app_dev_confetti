@@ -1,9 +1,9 @@
 const httpStatus = require("http-status-codes")
 
-exports.pageNotFoundError = (req, res) => {
+exports.pageNotFoundError = (req, res, error) => {
     let errorCode = httpStatus.NOT_FOUND;
     res.status(errorCode);
-    res.render(error);
+    //res.render(error);
 }
 
 exports.internalServerError = (error, req, res, next) => {

@@ -6,6 +6,8 @@ homeController = require("./controllers/homeController"),
 errorController = require("./controllers/errorController"), 
 layouts = require("express-ejs-layouts"), mongoose = require("mongoose"), 
 subscribersController = require("./controllers/subscribersController"),
+usersController = require("./controllers/usersController"),
+coursesController = require("./controllers/coursesController"),
 methodOverride = require("method-override");
 
 mongoose.connect("mongodb://localhost:27017/confetti_cuisine", {useNewUrlParser: true});
@@ -23,6 +25,7 @@ router.use(express.static("public"));
 router.use(methodOverride("_method", {methods: ["POST", "GET"]}));
 
 router.get("/", homeController.index);
+
 
 router.get("/subscribers", subscribersController.index, subscribersController.indexView);
 router.get("/subscribers/new", subscribersController.new);

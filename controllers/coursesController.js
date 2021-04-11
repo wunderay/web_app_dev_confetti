@@ -5,7 +5,7 @@ const Course = require("../models/course");
 module.exports = {
     index: (req, res, next) => {
         Course.find()
-        ,then(courses => {
+        .then(courses => {
             res.locals.courses = courses;
             next();
         })
@@ -15,10 +15,10 @@ module.exports = {
         })
     },
     indexView: (req, res) => {
-        res.render("/courses/index");
+        res.render("courses/index");
     },
     new: (req, res) => {
-        res.render("/courses/new");
+        res.render("courses/new");
     },
     create: (req, res, next) => {
         let newcourse = new Course({
@@ -61,7 +61,7 @@ module.exports = {
         let courseId = req.params.id;
         Course.findById(courseId)
         .then(course => {
-            res.render("/courses/edit", {course: course});
+            res.render("courses/edit", {course: course});
         })
         .catch(error => {
             console.log(`Error fetching course by ID: ${error.message}`);
@@ -79,7 +79,7 @@ module.exports = {
         Course.findByIdAndUpdate(courseId, updatedcourse)
         .then(course => {
             res.locals.course = course;
-            res.locals.redirect = `/courses/${course._id}`;
+            res.locals.redirect = `courses/${course._id}`;
             next();
         })
         .catch(error => {
@@ -91,7 +91,7 @@ module.exports = {
         let courseId = req.params.id;
         Course.findByIdAndRemove(courseId)
         .then(() => {
-            res.locals.redirect = "/courses";
+            res.locals.redirect = "courses";
             next();
         })
         .catch(error => {

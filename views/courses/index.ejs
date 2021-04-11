@@ -2,14 +2,16 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Email</th>
+            <th>Course</th>
+            <th>Description</th>
+            <th>Max Class Size</th>
+            <th>Cost $</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
     </thead>
     <tbody>
-        <% courses.foreach(course => { %>
+        <% courses.forEach(course => { %>
             <tr>
                 <td>
                     <a href="<%= `/courses/${course._id}` %>">
@@ -18,6 +20,12 @@
                 </td>
                 <td>
                     <%= course.description %> 
+                </td>
+                <td>
+                    <%= course.maxStudents %> 
+                </td>
+                <td>
+                    <%= course.cost %> 
                 </td>
                 <td>
                     <a href="<%= `/courses/${course._id}/edit` %>">

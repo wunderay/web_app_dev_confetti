@@ -5,7 +5,7 @@ const User = require("../models/user");
 module.exports = {
     index: (req, res, next) => {
         User.find()
-        ,then(users => {
+        .then(users => {
             res.locals.users = users;
             next();
         })
@@ -15,10 +15,10 @@ module.exports = {
         })
     },
     indexView: (req, res) => {
-        res.render("/users/index");
+        res.render("users/index");
     },
     new: (req, res) => {
-        res.render("/users/new");
+        res.render("users/new");
     },
     create: (req, res, next) => {
         let newuser = new User({
@@ -33,7 +33,7 @@ module.exports = {
         User.create(newuser)
         .then( user => {
             res.locals.user = user;
-            res.locals.redirect = "/users";
+            res.locals.redirect = "users";
             next();
         })
         .catch(error => {
@@ -64,7 +64,7 @@ module.exports = {
         let userId = req.params.id;
         User.findById(userId)
         .then(user => {
-            res.render("/users/edit", {user: user});
+            res.render("users/edit", {user: user});
         })
         .catch(error => {
             console.log(`Error fetching user by ID: ${error.message}`);
@@ -85,7 +85,7 @@ module.exports = {
         User.findByIdAndUpdate(userId, updateduser)
         .then(user => {
             res.locals.user = user;
-            res.locals.redirect = `/users/${user._id}`;
+            res.locals.redirect = `users/${user._id}`;
             next();
         })
         .catch(error => {
@@ -97,7 +97,7 @@ module.exports = {
         let userId = req.params.id;
         User.findByIdAndRemove(userId)
         .then(() => {
-            res.locals.redirect = "/users";
+            res.locals.redirect = "users";
             next();
         })
         .catch(error => {

@@ -4,12 +4,13 @@
         <tr>
             <th>Name</th>
             <th>Email</th>
+            <th>ZipCode</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
     </thead>
     <tbody>
-        <% subscribers.foreach(subscriber => { %>
+        <% subscribers.forEach(subscriber => { %>
             <tr>
                 <td>
                     <a href="<%= `/subscribers/${subscriber._id}` %>">

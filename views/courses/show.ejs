@@ -1,0 +1,29 @@
+<h2 class="center">Course Table</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Course</th>
+            <th>Description</th>
+            <th>Max Class Size</th>
+            <th>Cost $</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% courses.forEach(course => { %>
+            <tr>
+                <td>
+                    <%= course.title %> 
+                </td>
+                <td>
+                    <%= course.description %> 
+                </td>
+                <td>
+                    <%= course.maxStudents %> 
+                </td>
+                <td>
+                    <%= course.cost %> 
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>

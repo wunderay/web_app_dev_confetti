@@ -4,12 +4,11 @@
         <tr>
             <th>Name</th>
             <th>Email</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>ZipCode</th>
+            <th>Number of Courses</th>
         </tr>
     </thead>
     <tbody>
-        <% subscribers.foreach(subscriber=> { %>
             <tr>
                 <td>Name</td>
                 <td>
@@ -30,8 +29,7 @@
             </tr>
             <tr>
                 <td>Number of Courses</td>
-                <td><%= subscribers.courses.length %></td>
+                <td><%= subscriber.courses.length %></td>
             </tr>
-            <% }) %>
     </tbody>
 </table>
