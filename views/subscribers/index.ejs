@@ -1,10 +1,12 @@
 <h2 class="center">Subscriber Table</h2>
+<a class="button" href="/subscribers/new">
+    <span>Add Subscriber</span>
+</a>
 <table class="table">
     <thead>
         <tr>
             <th>Name</th>
             <th>Email</th>
-            <th>ZipCode</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -19,9 +21,6 @@
                 </td>
                 <td>
                     <%= subscriber.email %> 
-                </td>
-                <td>
-                    <%= subscriber.zipCode %> 
                 </td>
                 <td>
                     <a href="<%= `/subscribers/${subscriber._id}/edit` %>">
