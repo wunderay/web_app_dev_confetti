@@ -87,6 +87,7 @@ module.exports = {
         req.logout();
         req.flash("success", "You have been logged out!");
         res.locals.redirect = "/";
+        next();
     },
     redirectView: (req, res, next) => {
         let redirectPath = res.locals.redirect;

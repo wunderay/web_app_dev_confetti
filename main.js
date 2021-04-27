@@ -1,4 +1,4 @@
-const subscriber = require("./models/subscriber");
+//const subscriber = require("./models/subscriber");
 
 const express = require("express"), app = express(),
 router = express.Router(),
@@ -9,10 +9,10 @@ subscribersController = require("./controllers/subscribersController"),
 usersController = require("./controllers/usersController"),
 coursesController = require("./controllers/coursesController"),
 methodOverride = require("method-override"),
-passport = require("passport"),
 cookieParser = require("cookie-parser"),
 expressSession = require("express-session"),
 expressValidator = require("express-validator"),
+passport = require("passport"),
 connectFlash = require("connect-flash")
 const User = require("./models/user");
 
@@ -21,9 +21,8 @@ mongoose.connect("mongodb://localhost:27017/confetti_cuisine", {useNewUrlParser:
 app.set("port", process.env.PORT || 3000);
 
 app.set("view engine", "ejs");
-app.use(
-    express.urlencoded({extnded: false})
-);
+
+app.use(express.urlencoded({extended: false}));
 router.use(layouts);
 router.use(express.static("public"));
 router.use(expressValidator());
@@ -49,7 +48,8 @@ passport.deserializeUser(User.deserializeUser);
 router.use((req, res, next) => {
 res.locals.flashMessages = req.flash();
 res.locals.loggedIn = req.isUnauthenticated();
-res.locals.currentUser = req.user;
+res.locals.currentUser = req.User;
+next();
 })
 
 
