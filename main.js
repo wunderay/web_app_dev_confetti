@@ -42,12 +42,13 @@ router.use(connectFlash());
 router.use(passport.initialize());
 router.use(passport.session());
 passport.use(User.createStrategy());
-passport.use('local',User.serializeUser);
+//passport.use('local',User.serializeUser);
+passport.serializeUser(User.serializeUser);
 passport.deserializeUser(User.deserializeUser);
 
 router.use((req, res, next) => {
 res.locals.flashMessages = req.flash();
-res.locals.loggedIn = req.isUnauthenticated();
+res.locals.loggedIn = req.isAuthenticated();
 res.locals.currentUser = req.User;
 next();
 })

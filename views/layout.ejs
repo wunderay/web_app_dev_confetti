@@ -3,7 +3,7 @@
 
 <head>
     <title>Confetti Cuisine</title>
-    <link rel="stylesheet" href="css/confetti_cuisine.css" />
+    <link rel="stylesheet" type='text/css' href="/css/confetti_cuisine.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 </head>
@@ -27,7 +27,7 @@
     </div>
 
     <div class="login">
-        <% if (false) { %>
+        <% if (loggedIn) { %>
         <p>Logged in as <a href="<%= `/users/${currentUser._id}`%>">
             <%= currentUser.fullName %>
         </a>
@@ -40,7 +40,7 @@
     </div>
 
     <div class="flashes">
-        <% if(false) { %>
+        <% if(flashMessages) { %>
             <% if(flashMessages.sucess) { %>
                 <div class="flash sucess">
                     <%= flashMessages.success %>
