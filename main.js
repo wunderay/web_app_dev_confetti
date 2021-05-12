@@ -11,7 +11,8 @@ const express = require("express"),
     expressSession = require("express-session"),
     expressValidator = require("express-validator"),
     connectFlash = require("connect-flash"),
-    User = require("./models/user");
+    User = require("./models/user"),
+    usersController = require("./controllers/usersController");
 
 mongoose.connect(
     "mongodb://localhost:27017/confetti_cuisine", 
@@ -35,7 +36,7 @@ app.use(
 
 app.use(express.json());
 
-//sesion and cookies
+//sesion
 app.use(cookieParser("my_passcode"));
 app.use(expressSession({
     secret: "my_passcode",
@@ -54,6 +55,7 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+//cookie
 app.use((req, res, next) => {
     res.locals.flashMessages = req.flash();
     res.locals.loggedIn = req.isAuthenticated();
