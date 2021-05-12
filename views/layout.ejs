@@ -3,7 +3,7 @@
 
 <head>
     <title>Confetti Cuisine</title>
-    <link rel="stylesheet" type='text/css' href="/css/confetti_cuisine.css" />
+    <link rel="stylesheet" type="text/css" href="/css/confetti_cuisine.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 </head>
@@ -31,29 +31,32 @@
 
     <div class="login">
         <% if (loggedIn) { %>
-        <p>Logged in as <a href="<%= `/users/${currentUser._id}`%>">
-            <%= currentUser.fullName %>
-        </a>
-        <a href="/users/logout">Log out</a>
-        </p>
-        <% } else { %>
-            <a href="/users/login">Log in</a>    
-        <% } %>
-
+            <p>
+                Logged in as
+                <a href="<%= `/users/${currentUser._id}`%>">
+                    <%= currentUser.fullName %>
+                </a>
+                <span class="log-out">
+                    <a href="/users/logout">Log out</a>
+                </span>
+            </p>
+            <% } else { %>
+                <a href="/users/login">Log in</a>
+                <% } %>
     </div>
 
-    <div class="flash">
+    <div class="flashes">
         <% if(flashMessages) { %>
-            <% if(flashMessages.sucess) { %>
+            <% if(flashMessages.success) { %>
                 <div class="flash success">
                     <%= flashMessages.success %>
                 </div>
-            <% } else if(flashMessages.error) { %>
-                <div class="flash error">
-                    <%= flashMessages.error %>
-                </div>
-            <% } %>
-        <% } %>
+                <% } else if(flashMessages.error) { %>
+                    <div class="flash error">
+                        <%= flashMessages.error %>
+                    </div>
+                    <% } %>
+                        <% } %>
     </div>
     <div class="container">
         <%- body%>
