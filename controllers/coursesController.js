@@ -55,7 +55,7 @@ module.exports = {
         })
     },
     showView: (req, res) =>{
-        res.render(courses/show);
+        res.render("courses/show");
     },
     edit: (req, res, next) => {
         let courseId = req.params.id;
