@@ -23,6 +23,9 @@
             <a class="button" href="/subscribers">
                 <span>Contact</span>
             </a>
+            <a class="button" href="/users">
+                <span>Users</span>
+            </a>
         </div>
     </div>
 
@@ -39,14 +42,14 @@
 
     </div>
 
-    <div class="flashes">
+    <div class="flash">
         <% if(flashMessages) { %>
             <% if(flashMessages.sucess) { %>
-                <div class="flash sucess">
+                <div class="flash success">
                     <%= flashMessages.success %>
                 </div>
             <% } else if(flashMessages.error) { %>
-                <div class="flash sucess">
+                <div class="flash error">
                     <%= flashMessages.error %>
                 </div>
             <% } %>

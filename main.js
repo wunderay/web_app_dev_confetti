@@ -4,7 +4,8 @@ const express = require("express"), app = express(),
 router = express.Router(),
 homeController = require("./controllers/homeController"),
 errorController = require("./controllers/errorController"), 
-layouts = require("express-ejs-layouts"), mongoose = require("mongoose"), 
+layouts = require("express-ejs-layouts"), 
+mongoose = require("mongoose"), 
 subscribersController = require("./controllers/subscribersController"),
 usersController = require("./controllers/usersController"),
 coursesController = require("./controllers/coursesController"),
@@ -14,19 +15,21 @@ expressSession = require("express-session"),
 expressValidator = require("express-validator"),
 passport = require("passport"),
 connectFlash = require("connect-flash")
-const User = require("./models/user");
+User = require("./models/user");
 
 mongoose.connect("mongodb://localhost:27017/confetti_cuisine", {useNewUrlParser: true});
+mongoose.set("useCreateIndex", true);
 
 app.set("port", process.env.PORT || 3000);
 
 app.set("view engine", "ejs");
 
 app.use(express.urlencoded({extended: false}));
+router.use(methodOverride("_method", {methods: ["POST", "GET"]}));
 router.use(layouts);
 router.use(express.static("public"));
 router.use(expressValidator());
-router.use(methodOverride("_method", {methods: ["POST", "GET"]}));
+
 router.use(express.json());
 
 router.use(cookieParser("my_passcode"));
@@ -39,18 +42,19 @@ router.use(expressSession({
     saveUninitialized: false
  }));
 router.use(connectFlash());
+
 router.use(passport.initialize());
 router.use(passport.session());
 passport.use(User.createStrategy());
 //passport.use('local',User.serializeUser);
-passport.serializeUser(User.serializeUser);
-passport.deserializeUser(User.deserializeUser);
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 router.use((req, res, next) => {
-res.locals.flashMessages = req.flash();
-res.locals.loggedIn = req.isAuthenticated();
-res.locals.currentUser = req.User;
-next();
+  res.locals.flashMessages = req.flash();
+  res.locals.loggedIn = req.isAuthenticated();
+  res.locals.currentUser = req.User;
+  next();
 })
 
 
@@ -63,10 +67,9 @@ router.get("/users/login", usersController.login);
 router.post("/users/login", usersController.authenticate);
 router.post("/users/logout", usersController.logout, usersController.redirectView);
 
+router.get("/users/:id", usersController.show, usersController.showView);
 router.get("/users/:id/edit", usersController.edit);
 router.put("/users/:id/update", usersController.update, usersController.redirectView);
-
-router.get("/users/:id", usersController.show, usersController.showView);
 router.delete("/users/:id/delete", usersController.delete, usersController.redirectView);
 
 router.get("/subscribers", subscribersController.index, subscribersController.indexView);

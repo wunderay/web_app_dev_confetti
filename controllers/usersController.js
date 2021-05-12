@@ -42,7 +42,7 @@ module.exports = {
         
         User.register(newUser, req.body.password, (error, user) => {
             if (user) {
-                req.flash("success", "User account has been successfully created!");
+                req.flash("success", `${user.fullName} has been successfully created!`);
                 res.locals.redirect= "/users";
                 next();
             }
@@ -56,26 +56,25 @@ module.exports = {
     validate: (req, res, next) => {
         req.sanitizeBody("email").normalizeEmail({
             all_lowercase: true
-            }).trim();
-          req.check("email", "Email is invalid").isEmail();
-          req.check("zipCode", "Zip code is invalid")
-        .notEmpty().isInt().isLength({
-            min: 5,
+        }).trim();
+
+        req.check("email", "email is not valid!").notEmpty().isEmail();
+        req.check("zipCode", "Zip Code is not valid.").notEmpty().isInt().isLength({
+            min: 5, 
             max: 5
-          }).equals(req.body.zipCode);
-          req.check("password", "Password cannot be empty").notEmpty();
-        
-          req.getValidationResult().then((error) => {
-            if (!error.isEmpty()) {
-              let messages = error.array().map(e => e.msg);
-              req.skip = true;
-              req.flash("error", messages.join(" and "));
-              res.locals.redirect = "/users/new";
-              next();
-            } else {
-              next();
+        })
+        req.check("password", "Password can not be empty").notEmpty();
+
+        req.getValidationResult().then((error) => {
+            if(!error.isEmpty()) {
+                let messages = error.array().map(e => e.msg);
+                req.flash("error", messages.join(" and "));
+                req.skip = true;
+                res.locals.redirect = "/users/new";
+                next();
             }
-          });
+            else next();
+        });
     },
     authenticate: passport.authenticate("local", {
         failureRedirect: "/users/login",
